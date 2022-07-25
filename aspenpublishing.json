@@ -1,0 +1,3687 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+      "title": "Cedar API",
+      "description": "# Mint & Distribute NFT tokens\n\n## Minting\n\nCollection -> Token -> Audit -> Mint\n\n## Distribution\n\n### Fiat\n(Sign Terms) -> Lock -> Transfer\n\n### Crypto\nLock -> (Sign Terms, Approve, Fill Order)\n\n[//]: # (![Pre-Minted Distribution!]&#40;docs/Pre-Minted-Distribution.png \"Pre Minted Distribution\"&#41;)",
+      "version": "v1"
+    },
+    "paths": {
+      "/Auth": {
+        "post": {
+          "tags": [
+            "Auth"
+          ],
+          "summary": "Creates a JWT Bearer token for authorization",
+          "description": "Doesn't need authorization!",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "JWT token created",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "type": "string"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            },
+            "403": {
+              "description": "Invalid name or password",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ProblemDetails"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "Internal server error"
+            }
+          }
+        }
+      },
+      "/Collection": {
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Create a new collection",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCollectionRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCollectionRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateCollectionRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Get a list of collections",
+          "parameters": [
+            {
+              "name": "page",
+              "in": "query",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponsePagedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponsePagedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponsePagedResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Get a collection by Id",
+          "operationId": "GetCollectionById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Update a collection by Id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCollectionRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCollectionRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateCollectionRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Delete a collection by Id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Tokens": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Get a list of tokens for this collection",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "page",
+              "in": "query",
+              "schema": {
+                "type": "integer",
+                "format": "int32",
+                "default": 1
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponsePagedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponsePagedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponsePagedResult"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Terms": {
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Upload user terms file",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "file": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                },
+                "encoding": {
+                  "file": {
+                    "style": "form"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UserTermsResponse"
+                    }
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UserTermsResponse"
+                    }
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/UserTermsResponse"
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Terms/Enable/{status}": {
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Enable or disable accept terms",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "status",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "boolean"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/CollectionResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Terms/{address}": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Check if an user has signed the terms",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "address",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SignatureResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SignatureResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/SignatureResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Audit": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Check if collection is ready for deploying, minting or re-syncing\r\nReturns a list of invalid fields and tokens that must be addressed",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuditResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuditResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AuditResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Deploy": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Get deployment status",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Deploy the collection contract and it's dependencies.\r\nThis endpoint needs updating once contract is finalized.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Mint": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Get minting status",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Start minting tokens of the collection, Will also update already minted tokens.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Resync": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Get resync status",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Start updating the minted tokens. Will not mint new tokens.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TaskStatusResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Availability": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Returns a list of tokens available for specified collection",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AvailabilityResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AvailabilityResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/AvailabilityResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Files/{index}": {
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Upload a file for all the tokens in collection.\r\nUploading for the same index will replace the existing file.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "index",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dtoFile": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                },
+                "encoding": {
+                  "dtoFile": {
+                    "style": "form"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FileResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FileResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FileResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Attributes/Generate": {
+        "patch": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Generate attributes for given collection from provided trait options randomly",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenerateAttribute"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenerateAttribute"
+                  }
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GenerateAttribute"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StringListListPagedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StringListListPagedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StringListListPagedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Metadata/Export": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Download token metadata for specified collection",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Metadata/Import": {
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "Upload token metadata for specified collection",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "zipFile": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                },
+                "encoding": {
+                  "zipFile": {
+                    "style": "form"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Collection/{id}/Tokens/Import": {
+        "get": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "TODO: Get status of a import session with files uploaded and their hash etc",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "TODO: Upload files for a specified collection",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "files": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "format": "binary"
+                      }
+                    }
+                  }
+                },
+                "encoding": {
+                  "files": {
+                    "style": "form"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "TODO: Commit changes based on uploaded files",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Collection"
+          ],
+          "summary": "TODO: Discard any previously started (but not committed) bulk upload session.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Lock": {
+        "post": {
+          "tags": [
+            "Lock"
+          ],
+          "summary": "Lock a token in specified collection if the lock request is successful",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LockRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LockRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LockRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Token locked for either Fiat or Crypto transaction",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/LockResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/LockResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/LockResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "403": {
+              "description": "Unauthorised"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal server error"
+            },
+            "503": {
+              "description": "Service Unavailable"
+            }
+          }
+        }
+      },
+      "/Lock/{id}": {
+        "get": {
+          "tags": [
+            "Lock"
+          ],
+          "summary": "Check the transfer/lock status",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Status of token transfer/lock",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "403": {
+              "description": "Unauthorised"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal server error"
+            },
+            "503": {
+              "description": "Service Unavailable"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Lock"
+          ],
+          "summary": "Unlock the specified locked token\r\nAlso cancel the 0x order if the payment type was crypto",
+          "description": "Doesn't delete the lock in database!",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Order cancelled",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "403": {
+              "description": "Unauthorised"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal server error"
+            },
+            "503": {
+              "description": "Service Unavailable"
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "Lock"
+          ],
+          "summary": "Extend the expiry time for a specified lock",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExtendRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ExtendResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ExtendResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/ExtendResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Lock/{id}/Transfer": {
+        "post": {
+          "tags": [
+            "Lock"
+          ],
+          "summary": "Execute a transfer for Fiat payment type. Throws bad request error if payment type is crypto.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Token transfer initiated",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "403": {
+              "description": "Unauthorised"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal server error"
+            },
+            "503": {
+              "description": "Service Unavailable"
+            }
+          }
+        }
+      },
+      "/Lock/Distribute": {
+        "post": {
+          "tags": [
+            "Lock"
+          ],
+          "summary": "Lock a token in specified collection if the lock request is successful then transfer it.",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributeRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributeRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DistributeRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Token locked and Transferred",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/StatusResponse"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad request"
+            },
+            "403": {
+              "description": "Unauthorised"
+            },
+            "404": {
+              "description": "Not Found"
+            },
+            "500": {
+              "description": "Internal server error"
+            },
+            "503": {
+              "description": "Service Unavailable"
+            }
+          }
+        }
+      },
+      "/Token": {
+        "post": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Create a new token",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTokenRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTokenRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CreateTokenRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Token/{id}": {
+        "get": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Get a token by Id",
+          "operationId": "GetTokenById",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Update a token by Id",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTokenRequest"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTokenRequest"
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateTokenRequest"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Token/{collectionId}/{tokenId}": {
+        "get": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Get a token by on chain token Id",
+          "operationId": "GetTokenByExternalId",
+          "parameters": [
+            {
+              "name": "collectionId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "tokenId",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/TokenResponse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Token/{id}/Attributes": {
+        "get": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Get the token attributes",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TokenAttributeResponse"
+                    }
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TokenAttributeResponse"
+                    }
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/TokenAttributeResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Update the token attributes, it will replace all existing attributes",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenAttributeRequest"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenAttributeRequest"
+                  }
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenAttributeRequest"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "patch": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Append token attributes, overwrite attributes with same `trait_type`",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenAttributeRequest"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenAttributeRequest"
+                  }
+                }
+              },
+              "application/*+json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TokenAttributeRequest"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Token/{id}/Attributes/{traitType}": {
+        "delete": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Delete an attribute by `trait_type`",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "traitType",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "string"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      },
+      "/Token/{id}/Files": {
+        "get": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Get a list of files (IPFS Url) for this token",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FileResponse"
+                    }
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FileResponse"
+                    }
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/FileResponse"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/Token/{id}/Files/{index}": {
+        "post": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Upload a file for the token, where id is tokenId and index starts from 0. Uploading for the same index will replace the existing file.",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "index",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "multipart/form-data": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "dtoFile": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                },
+                "encoding": {
+                  "dtoFile": {
+                    "style": "form"
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Success",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FileResponse"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FileResponse"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/FileResponse"
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/UnauthorizedResult"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Not Found",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/NotFoundResult"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Bad Request",
+              "content": {
+                "text/plain": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                },
+                "text/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/BadRequestResult"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "Token"
+          ],
+          "summary": "Delete a file from the token by it's index",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            },
+            {
+              "name": "index",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "AuditResponse": {
+          "type": "object",
+          "properties": {
+            "collectionId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "collectionAudit": {
+              "$ref": "#/components/schemas/CollectionAudit"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AuditType": {
+          "enum": [
+            "PreDeployAudit",
+            "PreMintingAudit",
+            "PreResyncAudit"
+          ],
+          "type": "string"
+        },
+        "AuthRequest": {
+          "required": [
+            "name",
+            "password"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Username for autentication",
+              "example": "john.doe"
+            },
+            "password": {
+              "type": "string",
+              "example": "pa$$w0rd"
+            }
+          },
+          "additionalProperties": false
+        },
+        "AvailabilityResponse": {
+          "required": [
+            "count",
+            "id",
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string",
+              "description": "Name of the collection"
+            },
+            "count": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "BadRequestResult": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "Chain": {
+          "enum": [
+            "Ethereum",
+            "Ropsten",
+            "Rinkeby",
+            "Mumbai",
+            "Polygon",
+            "Palm",
+            "PalmTestnet"
+          ],
+          "type": "string"
+        },
+        "CollectionAudit": {
+          "type": "object",
+          "properties": {
+            "ready": {
+              "type": "boolean"
+            },
+            "auditType": {
+              "$ref": "#/components/schemas/AuditType"
+            },
+            "collection": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            },
+            "tokens": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TokenAudit"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "CollectionResponse": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string",
+              "nullable": true
+            },
+            "symbol": {
+              "type": "string",
+              "nullable": true
+            },
+            "address": {
+              "type": "string",
+              "nullable": true
+            },
+            "baseUri": {
+              "type": "string",
+              "nullable": true
+            },
+            "chain": {
+              "$ref": "#/components/schemas/Chain"
+            },
+            "maxTokens": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "state": {
+              "$ref": "#/components/schemas/State"
+            },
+            "defaultLockTime": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "royaltyPercentage": {
+              "type": "number",
+              "format": "double"
+            },
+            "feeRecipientAddress": {
+              "type": "string",
+              "nullable": true
+            },
+            "mintingWalletAddress": {
+              "type": "string",
+              "nullable": true
+            },
+            "mintType": {
+              "$ref": "#/components/schemas/MintType"
+            },
+            "limitMaxClaim": {
+              "type": "boolean"
+            },
+            "maxClaimPerWallet": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "clientWallet": {
+              "type": "string",
+              "nullable": true
+            },
+            "userTermsMessage": {
+              "type": "string",
+              "nullable": true
+            },
+            "enableTerms": {
+              "type": "boolean"
+            },
+            "userTerms": {
+              "$ref": "#/components/schemas/UserTermsResponse"
+            }
+          },
+          "additionalProperties": false
+        },
+        "CollectionResponsePagedResult": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/CollectionResponse"
+              },
+              "nullable": true
+            },
+            "page": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxPage": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "CreateCollectionRequest": {
+          "required": [
+            "chain",
+            "maxTokens",
+            "mintType",
+            "name",
+            "symbol"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "symbol": {
+              "type": "string"
+            },
+            "chain": {
+              "$ref": "#/components/schemas/Chain"
+            },
+            "maxTokens": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "defaultLockTime": {
+              "type": "integer",
+              "description": "",
+              "format": "int32",
+              "example": 3600
+            },
+            "royaltyPercentage": {
+              "type": "number",
+              "format": "double"
+            },
+            "feeRecipientAddress": {
+              "type": "string",
+              "nullable": true
+            },
+            "mintingWalletAddress": {
+              "type": "string",
+              "nullable": true
+            },
+            "mintType": {
+              "$ref": "#/components/schemas/MintType"
+            },
+            "limitMaxClaim": {
+              "type": "boolean"
+            },
+            "maxClaimPerWallet": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "clientWallet": {
+              "type": "string",
+              "nullable": true
+            },
+            "userTermsMessage": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "CreateTokenRequest": {
+          "required": [
+            "collectionId",
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "collectionId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string",
+              "nullable": true
+            },
+            "externalUrl": {
+              "type": "string",
+              "nullable": true
+            },
+            "numberOfFiles": {
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "Currency": {
+          "enum": [
+            "WETH",
+            "DAI",
+            "USDC",
+            "USD_Fiat",
+            "GBP_Fiat"
+          ],
+          "type": "string"
+        },
+        "DistributeRequest": {
+          "required": [
+            "collectionId",
+            "toAddress"
+          ],
+          "type": "object",
+          "properties": {
+            "collectionId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "toAddress": {
+              "type": "string"
+            },
+            "signedTerms": {
+              "type": "string",
+              "description": "If PaymentType is Fiat, SignedTerms is required\r\nSignature is added to the deployed contract",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "EvmTransaction": {
+          "type": "object",
+          "properties": {
+            "method": {
+              "type": "string",
+              "nullable": true
+            },
+            "params": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TransactionParam"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "ExtendRequest": {
+          "type": "object",
+          "properties": {
+            "expiry": {
+              "type": "number",
+              "description": "Extend time in seconds",
+              "format": "double"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ExtendResponse": {
+          "required": [
+            "expiresAt"
+          ],
+          "type": "object",
+          "properties": {
+            "expiresAt": {
+              "type": "string",
+              "description": "Unix timestamp identifying when the lock expiers",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        },
+        "FileResponse": {
+          "type": "object",
+          "properties": {
+            "index": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "web2Url": {
+              "type": "string",
+              "nullable": true
+            },
+            "ipfsUrl": {
+              "type": "string",
+              "nullable": true
+            },
+            "contentType": {
+              "type": "string",
+              "nullable": true
+            },
+            "extension": {
+              "type": "string",
+              "nullable": true
+            },
+            "status": {
+              "$ref": "#/components/schemas/FileStatus"
+            }
+          },
+          "additionalProperties": false
+        },
+        "FileStatus": {
+          "enum": [
+            "Local",
+            "Uploading",
+            "Uploaded"
+          ],
+          "type": "string"
+        },
+        "GenerateAttribute": {
+          "required": [
+            "traitOptions",
+            "traitType"
+          ],
+          "type": "object",
+          "properties": {
+            "traitType": {
+              "type": "string"
+            },
+            "addOnlyToTokensWith": {
+              "$ref": "#/components/schemas/TokenAttributeCondition"
+            },
+            "traitOptions": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TokenAttributeOption"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "LockRequest": {
+          "required": [
+            "collectionId",
+            "toAddress"
+          ],
+          "type": "object",
+          "properties": {
+            "collectionId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "toAddress": {
+              "type": "string"
+            },
+            "paymentType": {
+              "$ref": "#/components/schemas/PaymentType"
+            },
+            "signedTerms": {
+              "type": "string",
+              "description": "If PaymentType is Fiat, SignedTerms is required\r\nSignature is added to the deployed contract",
+              "nullable": true
+            },
+            "price": {
+              "$ref": "#/components/schemas/Price"
+            },
+            "expiry": {
+              "type": "number",
+              "description": "In seconds",
+              "format": "double"
+            }
+          },
+          "additionalProperties": false
+        },
+        "LockResponse": {
+          "required": [
+            "approvalData",
+            "expiresAt",
+            "lockId",
+            "orderData"
+          ],
+          "type": "object",
+          "properties": {
+            "lockId": {
+              "type": "integer",
+              "description": "Unique Id for a lock",
+              "format": "int32"
+            },
+            "acceptTermsData": {
+              "$ref": "#/components/schemas/EvmTransaction"
+            },
+            "approvalData": {
+              "$ref": "#/components/schemas/EvmTransaction"
+            },
+            "orderData": {
+              "$ref": "#/components/schemas/EvmTransaction"
+            },
+            "expiresAt": {
+              "type": "string",
+              "description": "Unix timestamp identifying when the lock expires",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        },
+        "MintType": {
+          "enum": [
+            "PreMint",
+            "LiveMint"
+          ],
+          "type": "string"
+        },
+        "NotFoundResult": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "OrderStatus": {
+          "enum": [
+            "Pending",
+            "Failed",
+            "Cancelled",
+            "Expired",
+            "Completed"
+          ],
+          "type": "string"
+        },
+        "PaymentType": {
+          "enum": [
+            "Crypto",
+            "Fiat"
+          ],
+          "type": "string"
+        },
+        "Price": {
+          "type": "object",
+          "properties": {
+            "currency": {
+              "$ref": "#/components/schemas/Currency"
+            },
+            "value": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "additionalProperties": false
+        },
+        "ProblemDetails": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "string",
+              "nullable": true
+            },
+            "title": {
+              "type": "string",
+              "nullable": true
+            },
+            "status": {
+              "type": "integer",
+              "format": "int32",
+              "nullable": true
+            },
+            "detail": {
+              "type": "string",
+              "nullable": true
+            },
+            "instance": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": { }
+        },
+        "QueueStatus": {
+          "enum": [
+            "Unknown",
+            "InQueue",
+            "Processing",
+            "Completed",
+            "Error"
+          ],
+          "type": "string"
+        },
+        "SignatureResult": {
+          "type": "object",
+          "properties": {
+            "signed": {
+              "type": "boolean"
+            },
+            "termsActivated": {
+              "type": "boolean"
+            },
+            "url": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "State": {
+          "enum": [
+            "Pending",
+            "Deploying",
+            "DeploymentError",
+            "Deployed"
+          ],
+          "type": "string"
+        },
+        "StatusResponse": {
+          "required": [
+            "lockId",
+            "status",
+            "updatedAt"
+          ],
+          "type": "object",
+          "properties": {
+            "lockId": {
+              "type": "integer",
+              "description": "Unique Id for a lock",
+              "format": "int32"
+            },
+            "status": {
+              "$ref": "#/components/schemas/OrderStatus"
+            },
+            "expiresAt": {
+              "type": "string",
+              "format": "date-time"
+            },
+            "updatedAt": {
+              "type": "string",
+              "description": "Timestamp for last status change",
+              "format": "date-time"
+            }
+          },
+          "additionalProperties": false
+        },
+        "StringListListPagedResult": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "nullable": true
+            },
+            "page": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxPage": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "SyncStatus": {
+          "enum": [
+            "Dirty",
+            "Clean"
+          ],
+          "type": "string"
+        },
+        "TaskStatusResponse": {
+          "type": "object",
+          "properties": {
+            "collectionId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "status": {
+              "$ref": "#/components/schemas/QueueStatus"
+            },
+            "message": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenAttributeCondition": {
+          "type": "object",
+          "properties": {
+            "trait_type": {
+              "type": "string",
+              "nullable": true
+            },
+            "values": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenAttributeOption": {
+          "type": "object",
+          "properties": {
+            "value": {
+              "type": "string",
+              "nullable": true
+            },
+            "percentage": {
+              "type": "number",
+              "format": "double"
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenAttributeRequest": {
+          "required": [
+            "trait_type",
+            "traitObject"
+          ],
+          "type": "object",
+          "properties": {
+            "trait_type": {
+              "type": "string",
+              "description": "Trait (name of attribute)"
+            },
+            "traitObject": {
+              "type": "object",
+              "additionalProperties": { },
+              "description": "Value of the trait and it's type",
+              "example": {
+                "value": "string | number | boolean",
+                "display_type": "string | number | boolean"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenAttributeResponse": {
+          "required": [
+            "trait_type",
+            "traitObject"
+          ],
+          "type": "object",
+          "properties": {
+            "trait_type": {
+              "type": "string",
+              "description": "Type of the trait"
+            },
+            "traitObject": {
+              "type": "object",
+              "additionalProperties": { },
+              "description": "Value of the trait",
+              "example": {
+                "value": "string | number | boolean",
+                "display_type": "string | number | boolean"
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenAudit": {
+          "type": "object",
+          "properties": {
+            "tokenId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "invalidFields": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenResponse": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "tokenId": {
+              "type": "integer",
+              "description": "On chain Id for this token",
+              "format": "int32"
+            },
+            "collectionId": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "name": {
+              "type": "string",
+              "nullable": true
+            },
+            "description": {
+              "type": "string",
+              "nullable": true
+            },
+            "numberOfFiles": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "status": {
+              "$ref": "#/components/schemas/TokenStatus"
+            },
+            "syncStatus": {
+              "$ref": "#/components/schemas/SyncStatus"
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenResponsePagedResult": {
+          "type": "object",
+          "properties": {
+            "result": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/TokenResponse"
+              },
+              "nullable": true
+            },
+            "page": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "maxPage": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "TokenStatus": {
+          "enum": [
+            "Draft",
+            "Minting",
+            "MintingError",
+            "Minted",
+            "Locked",
+            "Transferred"
+          ],
+          "type": "string"
+        },
+        "TransactionParam": {
+          "type": "object",
+          "properties": {
+            "from": {
+              "type": "string",
+              "nullable": true
+            },
+            "to": {
+              "type": "string",
+              "nullable": true
+            },
+            "data": {
+              "type": "string",
+              "nullable": true
+            },
+            "chainId": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "UnauthorizedResult": {
+          "type": "object",
+          "properties": {
+            "statusCode": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "UpdateCollectionRequest": {
+          "required": [
+            "maxTokens",
+            "mintType",
+            "name",
+            "symbol"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "symbol": {
+              "type": "string"
+            },
+            "maxTokens": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "defaultLockTime": {
+              "type": "integer",
+              "format": "int32",
+              "example": 3600
+            },
+            "chain": {
+              "type": "string",
+              "nullable": true
+            },
+            "royaltyPercentage": {
+              "type": "number",
+              "format": "double"
+            },
+            "feeRecipientAddress": {
+              "type": "string",
+              "nullable": true
+            },
+            "mintingWalletAddress": {
+              "type": "string",
+              "description": "If minting wallet is set, cedar distribution api will fail",
+              "nullable": true
+            },
+            "mintType": {
+              "$ref": "#/components/schemas/MintType"
+            },
+            "limitMaxClaim": {
+              "type": "boolean"
+            },
+            "maxClaimPerWallet": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "clientWallet": {
+              "type": "string",
+              "nullable": true
+            },
+            "userTermsMessage": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        },
+        "UpdateTokenRequest": {
+          "required": [
+            "name"
+          ],
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string",
+              "nullable": true
+            },
+            "externalUrl": {
+              "type": "string",
+              "nullable": true
+            },
+            "numberOfFiles": {
+              "maximum": 2147483647,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "additionalProperties": false
+        },
+        "UserTermsResponse": {
+          "type": "object",
+          "properties": {
+            "web2Url": {
+              "type": "string",
+              "nullable": true
+            },
+            "ipfsUrl": {
+              "type": "string",
+              "nullable": true
+            },
+            "contentType": {
+              "type": "string",
+              "nullable": true
+            },
+            "extension": {
+              "type": "string",
+              "nullable": true
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "securitySchemes": {
+        "Bearer": {
+          "type": "apiKey",
+          "description": "Please insert JWT. Example: \"Bearer xxxxxxxxxxxxxxxx\"",
+          "name": "Authorization",
+          "in": "header"
+        }
+      }
+    },
+    "security": [
+      {
+        "Bearer": [ ]
+      }
+    ]
+  }
