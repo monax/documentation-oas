@@ -1,7 +1,7 @@
 {
     "openapi": "3.0.1",
     "info": {
-      "title": "Cedar API",
+      "title": "Publishing",
       "description": "# Mint & Distribute NFT tokens\n\n## Minting\n\nCollection -> Token -> Audit -> Mint\n\n## Distribution\n\n### Fiat\n(Sign Terms) -> Lock -> Transfer\n\n### Crypto\nLock -> (Sign Terms, Approve, Fill Order)\n\n[//]: # (![Pre-Minted Distribution!]&#40;docs/Pre-Minted-Distribution.png \"Pre Minted Distribution\"&#41;)",
       "version": "v1"
     },
@@ -9,7 +9,7 @@
       "/Auth": {
         "post": {
           "tags": [
-            "Auth"
+            "Authentication"
           ],
           "summary": "Creates a JWT Bearer token for authorization",
           "description": "Doesn't need authorization!",
