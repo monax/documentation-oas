@@ -5,14 +5,19 @@
       "description": "# Mint & Distribute NFT tokens\n\n## Minting\n\nCollection -> Token -> Audit -> Mint\n\n## Distribution\n\n### Fiat\n(Sign Terms) -> Lock -> Transfer\n\n### Crypto\nLock -> (Sign Terms, Approve, Fill Order)\n\n[//]: # (![Pre-Minted Distribution!]&#40;docs/Pre-Minted-Distribution.png \"Pre Minted Distribution\"&#41;)",
       "version": "v1"
     },
+    "servers": [
+      {
+        "url": "https://publishing.aspenft.io/"
+      }
+    ],
     "paths": {
-      "/Auth": {
+      "/auth": {
         "post": {
           "tags": [
             "Authentication"
           ],
           "summary": "Creates a JWT Bearer token for authorization",
-          "description": "Doesn't need authorization!",
+          "description": "Generate a new set of API credentials.",
           "requestBody": {
             "content": {
               "application/json": {
@@ -99,12 +104,12 @@
           }
         }
       },
-      "/Collection": {
+      "/collection": {
         "post": {
           "tags": [
             "Collection"
           ],
-          "summary": "Create a new collection",
+          "summary": "Create Collection",
           "requestBody": {
             "content": {
               "application/json": {
@@ -151,7 +156,7 @@
           "tags": [
             "Collection"
           ],
-          "summary": "Get a list of collections",
+          "summary": "Get list of collections",
           "parameters": [
             {
               "name": "page",
@@ -187,12 +192,12 @@
           }
         }
       },
-      "/Collection/{id}": {
+      "/collection/{id}": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Get a collection by Id",
+          "summary": "Get Collection by Id",
           "operationId": "GetCollectionById",
           "parameters": [
             {
@@ -232,7 +237,7 @@
           "tags": [
             "Collection"
           ],
-          "summary": "Update a collection by Id",
+          "summary": "Update Collection by Id",
           "parameters": [
             {
               "name": "id",
@@ -350,7 +355,7 @@
           "tags": [
             "Collection"
           ],
-          "summary": "Delete a collection by Id",
+          "summary": "Delete Collection by Id",
           "parameters": [
             {
               "name": "id",
@@ -369,12 +374,12 @@
           }
         }
       },
-      "/Collection/{id}/Tokens": {
+      "/collection/{id}/Tokens": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Get a list of tokens for this collection",
+          "summary": "Get list of tokens for collection",
           "parameters": [
             {
               "name": "id",
@@ -459,7 +464,7 @@
           }
         }
       },
-      "/Collection/{id}/Terms": {
+      "/collection/{id}/Terms": {
         "post": {
           "tags": [
             "Collection"
@@ -589,12 +594,12 @@
           }
         }
       },
-      "/Collection/{id}/Terms/Enable/{status}": {
+      "/collection/{id}/Terms/Enable/{status}": {
         "post": {
           "tags": [
             "Collection"
           ],
-          "summary": "Enable or disable accept terms",
+          "summary": "Enable/Disable Accept Terms feature",
           "parameters": [
             {
               "name": "id",
@@ -643,7 +648,7 @@
           "tags": [
             "Collection"
           ],
-          "summary": "Check if an user has signed the terms",
+          "summary": "Check If User has Signed Terms",
           "parameters": [
             {
               "name": "id",
@@ -687,12 +692,13 @@
           }
         }
       },
-      "/Collection/{id}/Audit": {
+      "/collection/{id}/Audit": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Check if collection is ready for deploying, minting or re-syncing\r\nReturns a list of invalid fields and tokens that must be addressed",
+          "summary": "Audit Collection to check Status",
+          "description": "Check if collection is ready for deploying, minting or re-syncing\r\nReturns a list of invalid fields and tokens that must be addressed",          
           "parameters": [
             {
               "name": "id",
@@ -768,12 +774,12 @@
           }
         }
       },
-      "/Collection/{id}/Deploy": {
+      "/collection/{id}/Deploy": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Get deployment status",
+          "summary": "Get Deployment Status",
           "parameters": [
             {
               "name": "id",
@@ -812,7 +818,8 @@
           "tags": [
             "Collection"
           ],
-          "summary": "Deploy the collection contract and it's dependencies.\r\nThis endpoint needs updating once contract is finalized.",
+          "summary": "Deploy Collection Contract",
+          "description": "Deploy the collection contract and it's dependencies.\r\nThis endpoint needs updating once contract is finalized.",
           "parameters": [
             {
               "name": "id",
@@ -888,12 +895,12 @@
           }
         }
       },
-      "/Collection/{id}/Mint": {
+      "/collection/{id}/Mint": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Get minting status",
+          "summary": "Get Minting Status",
           "parameters": [
             {
               "name": "id",
@@ -932,7 +939,8 @@
           "tags": [
             "Collection"
           ],
-          "summary": "Start minting tokens of the collection, Will also update already minted tokens.",
+          "summary": "Mint Collection Tokens",
+          "description": "Start minting tokens of the collection, Will also update already minted tokens.",
           "parameters": [
             {
               "name": "id",
@@ -1028,12 +1036,12 @@
           }
         }
       },
-      "/Collection/{id}/Resync": {
+      "/collection/{id}/Resync": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Get resync status",
+          "summary": "Get Resync Status",
           "parameters": [
             {
               "name": "id",
@@ -1072,7 +1080,8 @@
           "tags": [
             "Collection"
           ],
-          "summary": "Start updating the minted tokens. Will not mint new tokens.",
+          "summary": "Update Minted Tokens.",
+          "description": "Start updating the minted tokens. Will not mint new tokens.",
           "parameters": [
             {
               "name": "id",
@@ -1168,12 +1177,12 @@
           }
         }
       },
-      "/Collection/{id}/Availability": {
+      "/collection/{id}/Availability": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Returns a list of tokens available for specified collection",
+          "summary": "Get List of Collection Tokens",
           "parameters": [
             {
               "name": "id",
@@ -1269,7 +1278,7 @@
           }
         }
       },
-      "/Collection/{id}/Files/{index}": {
+      "/collection/{id}/Files/{index}": {
         "post": {
           "tags": [
             "Collection"
@@ -1379,7 +1388,7 @@
           }
         }
       },
-      "/Collection/{id}/Attributes/Generate": {
+      "/collection/{id}/Attributes/Generate": {
         "patch": {
           "tags": [
             "Collection"
@@ -1508,12 +1517,12 @@
           }
         }
       },
-      "/Collection/{id}/Metadata/Export": {
+      "/collection/{id}/Metadata/Export": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "Download token metadata for specified collection",
+          "summary": "Download Token Metadata",
           "parameters": [
             {
               "name": "id",
@@ -1532,12 +1541,12 @@
           }
         }
       },
-      "/Collection/{id}/Metadata/Import": {
+      "/collection/{id}/Metadata/Import": {
         "post": {
           "tags": [
             "Collection"
           ],
-          "summary": "Upload token metadata for specified collection",
+          "summary": "Upload Token Metadata",
           "parameters": [
             {
               "name": "id",
@@ -1576,12 +1585,12 @@
           }
         }
       },
-      "/Collection/{id}/Tokens/Import": {
+      "/collection/{id}/Tokens/Import": {
         "get": {
           "tags": [
             "Collection"
           ],
-          "summary": "TODO: Get status of a import session with files uploaded and their hash etc",
+          "summary": "TODO: Get Status of a import session with files uploaded and their hash etc",
           "parameters": [
             {
               "name": "id",
@@ -1758,7 +1767,7 @@
           "tags": [
             "Lock"
           ],
-          "summary": "Check the transfer/lock status",
+          "summary": "Check Transfer/Lock status",
           "parameters": [
             {
               "name": "id",
@@ -1812,8 +1821,8 @@
           "tags": [
             "Lock"
           ],
-          "summary": "Unlock the specified locked token\r\nAlso cancel the 0x order if the payment type was crypto",
-          "description": "Doesn't delete the lock in database!",
+          "summary": "Unlock Locked Token",
+          "description": "This endpoint also cancels the 0x order if the payment type was crypto. Caveat. It doesn't delete the lock in database!",
           "parameters": [
             {
               "name": "id",
@@ -1867,7 +1876,7 @@
           "tags": [
             "Lock"
           ],
-          "summary": "Extend the expiry time for a specified lock",
+          "summary": "Extend Lock Expiry Time",
           "parameters": [
             {
               "name": "id",
@@ -1927,7 +1936,8 @@
           "tags": [
             "Lock"
           ],
-          "summary": "Execute a transfer for Fiat payment type. Throws bad request error if payment type is crypto.",
+          "summary": "Execute a Transfer for Fiat Payment.",
+          "description": "Throws bad request error if payment type is crypto.",
           "parameters": [
             {
               "name": "id",
@@ -1983,7 +1993,8 @@
           "tags": [
             "Lock"
           ],
-          "summary": "Lock a token in specified collection if the lock request is successful then transfer it.",
+          "summary": "Distribute Locked Token",
+          "description": "Lock a token in specified collection if the lock request is successful then transfer it.",
           "requestBody": {
             "content": {
               "application/json": {
