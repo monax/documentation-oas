@@ -20,8 +20,8 @@ jobs:
           git config user.email "oas@aspenft.io"
           git config user.name "OAS"
           git add *
-          git commit -m "OAS Update"
-          git push
+          git diff-index --quiet HEAD || git commit -m "OAS Update"
+          git diff-index --quiet HEAD || git push
 
       # Run GitHub Action to sync OpenAPI file at [path-to-file.json]
       - name: Update Readme.io
