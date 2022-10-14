@@ -3,6 +3,8 @@ name: Refresh repository with current OAS files
 # Run workflow for every push to the `main` branch
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *" # Every 15 mins
 
 jobs:
   Refresh:
@@ -14,6 +16,12 @@ jobs:
       - name: Download OAS files
         run: |
           wget https://publishing.aspenft.io/api/v1/spec.json -O aspenpublishing.json
+          wget https://identity.aspenft.io/api/v1/spec.json -O identity.json
+
+      - name: Update server URIs
+        run: |
+          cat aspenpublishing.json|jq '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' >> aspenpublishing.json
+          cat identity.json|jq '. |= . + {"servers":[{"url": "https://identity.aspenft.io/"}]}' >> identity.json
 
       - name: Update repository
         run: |
@@ -24,9 +32,17 @@ jobs:
           git diff-index --quiet HEAD || git push
 
       # Run GitHub Action to sync OpenAPI file at [path-to-file.json]
-      - name: Update Readme.io
+      - name: Update Readme.io - Publishing
         # We recommend specifying a fixed version, i.e. @7.4.0
         # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
         uses: readmeio/rdme@7.4.0
         with:
           rdme: openapi aspenpublishing.json --key=${{ secrets.README_API_KEY }} --id=${{ secrets.API_DEFINITION_ID }}
+
+      # Run GitHub Action to sync OpenAPI file at [path-to-file.json]
+      - name: Update Readme.io - Identity
+        # We recommend specifying a fixed version, i.e. @7.4.0
+        # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
+        uses: readmeio/rdme@7.4.0
+        with:
+          rdme: openapi identity.json --key=${{ secrets.README_API_KEY }} --id=${{ secrets.API_DEFINITION_ID }}
