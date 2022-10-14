@@ -20,8 +20,8 @@ jobs:
 
       - name: Update server URIs
         run: |
-          cat aspenpublishing.json|jq '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' >> aspenpublishing.json
-          cat identity.json|jq '. |= . + {"servers":[{"url": "https://identity.aspenft.io/"}]}' >> identity.json
+          cat aspenpublishing.json|jq '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' > aspenpublishing.json
+          cat identity.json|jq '. |= . + {"servers":[{"url": "https://identity.aspenft.io/"}]}' > identity.json
 
       - name: Update repository
         run: |
