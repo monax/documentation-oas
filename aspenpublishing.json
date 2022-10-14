@@ -15,6 +15,11 @@
         "description": "Doesn't need authorization!",
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/AuthRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/AuthRequest"
@@ -107,6 +112,11 @@
         "summary": "Create a new collection",
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateCollectionRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateCollectionRequest"
@@ -228,6 +238,129 @@
           }
         }
       },
+      "patch": {
+        "tags": [
+          "Collection"
+        ],
+        "summary": "Patch a collection by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CollectionResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              }
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "Collection"
@@ -246,6 +379,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateCollectionRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateCollectionRequest"
@@ -388,6 +526,14 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Recipient"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -526,6 +672,14 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Recipient"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -991,6 +1145,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlaceholderRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PlaceholderRequest"
@@ -1129,6 +1288,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlaceholderRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PlaceholderRequest"
@@ -1429,6 +1593,14 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TokenAttributeRequest"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -2120,6 +2292,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhaseRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PhaseRequest"
@@ -2318,6 +2495,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PhaseRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/PhaseRequest"
@@ -2758,6 +2940,15 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "object",
@@ -2985,6 +3176,15 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "integer",
+                  "format": "int32"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "object",
@@ -3337,6 +3537,14 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/GenerateAttribute"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -3729,6 +3937,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionInfoRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CollectionInfoRequest"
@@ -3808,6 +4021,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CollectionBundleRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CollectionBundleRequest"
@@ -4202,6 +4420,11 @@
         "summary": "Lock a token in specified collection if the lock request is successful",
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/LockRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/LockRequest"
@@ -4386,6 +4609,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExtendRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/ExtendRequest"
@@ -4491,6 +4719,11 @@
         "summary": "Lock a token in specified collection if the lock request is successful then transfer it.",
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DistributeRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/DistributeRequest"
@@ -4555,6 +4788,11 @@
         "summary": "Create a new token",
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTokenRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateTokenRequest"
@@ -4605,6 +4843,14 @@
         "operationId": "BatchTokens",
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CreateTokenRequest"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -4723,6 +4969,11 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTokenRequest"
+              }
+            },
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/UpdateTokenRequest"
@@ -5047,6 +5298,14 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TokenAttributeRequest"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -5154,6 +5413,14 @@
         ],
         "requestBody": {
           "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/TokenAttributeRequest"
+                }
+              }
+            },
             "application/json": {
               "schema": {
                 "type": "array",
@@ -6239,6 +6506,10 @@
         },
         "additionalProperties": false
       },
+      "IContractResolver": {
+        "type": "object",
+        "additionalProperties": false
+      },
       "LockRequest": {
         "required": [
           "collectionId",
@@ -6340,6 +6611,18 @@
           }
         },
         "additionalProperties": false
+      },
+      "OperationType": {
+        "enum": [
+          "Add",
+          "Remove",
+          "Replace",
+          "Move",
+          "Copy",
+          "Test",
+          "Invalid"
+        ],
+        "type": "string"
       },
       "OrderStatus": {
         "enum": [
@@ -6565,7 +6848,7 @@
             "nullable": true
           }
         },
-        "additionalProperties": { }
+        "additionalProperties": {}
       },
       "QueueStatus": {
         "enum": [
@@ -6739,7 +7022,7 @@
           },
           "traitObject": {
             "type": "object",
-            "additionalProperties": { },
+            "additionalProperties": {},
             "description": "Value of the trait and it's type",
             "example": {
               "value": "Hello World || 42 || true",
@@ -6762,7 +7045,7 @@
           },
           "traitObject": {
             "type": "object",
-            "additionalProperties": { },
+            "additionalProperties": {},
             "description": "Value of the trait",
             "example": {
               "value": "string | number | boolean",
@@ -6962,6 +7245,46 @@
         },
         "additionalProperties": false
       },
+      "UpdateCollectionRequestJsonPatchDocument": {
+        "type": "object",
+        "properties": {
+          "operations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UpdateCollectionRequestOperation"
+            },
+            "nullable": true
+          },
+          "contractResolver": {
+            "$ref": "#/components/schemas/IContractResolver"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UpdateCollectionRequestOperation": {
+        "type": "object",
+        "properties": {
+          "operationType": {
+            "$ref": "#/components/schemas/OperationType"
+          },
+          "path": {
+            "type": "string",
+            "nullable": true
+          },
+          "op": {
+            "type": "string",
+            "nullable": true
+          },
+          "from": {
+            "type": "string",
+            "nullable": true
+          },
+          "value": {
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateTokenRequest": {
         "required": [
           "name"
@@ -7046,7 +7369,12 @@
   },
   "security": [
     {
-      "Bearer": [ ]
+      "Bearer": []
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://publishing.aspenft.io/"
     }
   ]
 }
