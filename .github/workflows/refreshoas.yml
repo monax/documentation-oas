@@ -26,13 +26,13 @@ jobs:
           git diff-index --quiet HEAD || git commit -m "OAS Update"
           git push
 
-      # Run GitHub Action to sync OpenAPI file at [path-to-file.json]
-      - name: Update Readme.io - Identity
-        # We recommend specifying a fixed version, i.e. @7.4.0
-        # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
-        uses: readmeio/rdme@7.4.0
-        with:
-          rdme: openapi identity.json --key=${{ secrets.README_API_KEY }} --id=${{ secrets.IDENTITY_API_DEFINITION_ID }}
+      # # Run GitHub Action to sync OpenAPI file at [path-to-file.json]
+      # - name: Update Readme.io - Identity
+      #   # We recommend specifying a fixed version, i.e. @7.4.0
+      #   # Docs: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#example-using-versioned-actions
+      #   uses: readmeio/rdme@7.4.0
+      #   with:
+      #     rdme: openapi identity.json --key=${{ secrets.README_API_KEY }} --id=${{ secrets.IDENTITY_API_DEFINITION_ID }}
 
       # Run GitHub Action to sync OpenAPI file at [path-to-file.json]
       - name: Update Readme.io - Publishing
