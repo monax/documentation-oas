@@ -15,13 +15,8 @@ jobs:
 
       - name: Download OAS files
         run: |
-          wget https://publishing.aspenft.io/api/v1/spec.json -O aspenpublishing.json
-          wget https://identity.aspenft.io/api/v1/spec.json -O identity.json
-
-      - name: Update server URIs
-        run: |
-          cat aspenpublishing.json|jq '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' > aspenpublishing.json
-          cat identity.json|jq '. |= . + {"servers":[{"url": "https://identity.aspenft.io/"}]}' > identity.json
+          curl -s https://publishing.aspenft.io/api/v1/spec.json |jq -M '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' > aspenpublishing.json
+          curl -s https://identity.aspenft.io/api/v1/spec.json |jq -M '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' > identity.json
 
       - name: Update repository
         run: |
