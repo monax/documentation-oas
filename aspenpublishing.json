@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Cedar API",
+    "title": "Publishing API",
     "description": "# Mint & Distribute NFT tokens\n\n## Minting\n\nCollection -> Placeholder -> Tokens -> Audit -> Deploy -> Mint\n\n## Distribution\n\n### Fiat\n(Sign Terms) -> Lock -> Transfer\n\n### Crypto\nLock -> (Sign Terms, Approve, Fill Order)\n\n[//]: # (![Pre-Minted Distribution!]&#40;docs/Pre-Minted-Distribution.png \"Pre Minted Distribution\"&#41;)",
     "version": "v1"
   },
@@ -6147,6 +6147,13 @@
           },
           "fungibility": {
             "$ref": "#/components/schemas/Fungibility"
+          },
+          "chains": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Chain"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7224,7 +7231,7 @@
           },
           "mintingWalletAddress": {
             "type": "string",
-            "description": "If minting wallet is set, cedar distribution api will fail",
+            "description": "If minting wallet is set, distribution api will fail",
             "nullable": true
           },
           "limitMaxClaim": {
