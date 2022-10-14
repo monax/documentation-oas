@@ -24,7 +24,7 @@ jobs:
           git config user.name "OAS"
           git add *
           git diff-index --quiet HEAD || git commit -m "OAS Update"
-          git diff-index --quiet HEAD || git push
+          git diff-index --quiet HEAD || git push origin master
 
       # Run GitHub Action to sync OpenAPI file at [path-to-file.json]
       - name: Update Readme.io - Publishing
