@@ -1427,7 +1427,7 @@
   ],
   "servers": [
     {
-      "url": "https://publishing.aspenft.io/"
+      "url": "https://identity.aspenft.io/"
     }
   ]
 }
