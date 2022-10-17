@@ -16,7 +16,7 @@ jobs:
       - name: Download OAS files
         run: |
           curl -s https://publishing.aspenft.io/api/v1/spec.json |jq -M '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' > aspenpublishing.json
-          curl -s https://identity.aspenft.io/api/v1/spec.json |jq -M '. |= . + {"servers":[{"url": "https://publishing.aspenft.io/"}]}' > identity.json
+          curl -s https://identity.aspenft.io/api/v1/spec.json |jq -M '. |= . + {"servers":[{"url": "https://identity.aspenft.io/"}]}' > identity.json
 
       - name: Update repository
         run: |
