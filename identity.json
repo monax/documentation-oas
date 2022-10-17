@@ -182,7 +182,7 @@
         "tags": [
           "Gate"
         ],
-        "summary": "Get a specific gate by ID",
+        "summary": "Get the gate by id",
         "operationId": "GetGateById",
         "parameters": [
           {
@@ -242,7 +242,7 @@
         "tags": [
           "Gate"
         ],
-        "summary": "Replace a given gate by gate ID",
+        "summary": "Update gate",
         "operationId": "UpdateGate",
         "parameters": [
           {
@@ -321,7 +321,7 @@
         "tags": [
           "Gate"
         ],
-        "summary": "Delete a given gate by gate ID",
+        "summary": "Delete gate",
         "operationId": "DeleteGate",
         "parameters": [
           {
@@ -383,7 +383,7 @@
         "tags": [
           "Gate"
         ],
-        "summary": "Get all the gates from the client",
+        "summary": "Get all the client's gates",
         "operationId": "GetClientGates",
         "responses": {
           "200": {
@@ -511,7 +511,7 @@
         "tags": [
           "Gate"
         ],
-        "summary": "Create a new secret for a given gate ID",
+        "summary": "Generate a new secret for the gate",
         "operationId": "RefreshGateSecret",
         "parameters": [
           {
@@ -573,7 +573,7 @@
         "tags": [
           "Roles"
         ],
-        "summary": "Get all of the roles of a given gate by gate ID",
+        "summary": "Get all of the gate's roles",
         "operationId": "GetGateRoles",
         "parameters": [
           {
@@ -642,7 +642,7 @@
         "tags": [
           "Roles"
         ],
-        "summary": "Replace all the gate roles by new roles",
+        "summary": "Create/replace all the gate's roles",
         "operationId": "ReplaceGateRoles",
         "parameters": [
           {
@@ -878,7 +878,7 @@
         "tags": [
           "Roles"
         ],
-        "summary": "Get a specific gate role by ID",
+        "summary": "Get the gate role by id",
         "operationId": "GetGateRoleById",
         "parameters": [
           {
@@ -947,7 +947,7 @@
         "tags": [
           "Roles"
         ],
-        "summary": "Replace a given role by gate ID",
+        "summary": "Update the gate role",
         "operationId": "UpdateRole",
         "parameters": [
           {
@@ -1055,7 +1055,7 @@
         "tags": [
           "Roles"
         ],
-        "summary": "Delete a given role",
+        "summary": "Delete the gate's role",
         "operationId": "DeleteRole",
         "parameters": [
           {
