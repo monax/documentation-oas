@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Publishing API",
-    "description": "# Mint & Distribute NFT tokens\n\n## Minting\n\nCollection -> Placeholder -> Tokens -> Audit -> Deploy -> Mint\n\n## Distribution\n\n### Fiat\n(Sign Terms) -> Lock -> Transfer\n\n### Crypto\nLock -> (Sign Terms, Approve, Fill Order)\n\n[//]: # (![Pre-Minted Distribution!]&#40;docs/Pre-Minted-Distribution.png \"Pre Minted Distribution\"&#41;)",
+    "description": "#### Deploy Contract\nCreate Collection -> Set CollectionInfo (collection level metadata) -> Set up Sale and Royalty Recipients -> (Optional) Add Terms -> [POST] /Collection/{id}/Deploy\n\n#### Lazy Minting Tokens\n\nAdd Tokens -> Add Token Attributes -> Add main image -> (Optional) Add placeholder token + placeholder attributes + placeholder image -> (Optional) Add media file for token (music, video, animation) -> (Optional) Add additional images for token (carousel of images) -> Add phase/s for tokens (on chain claim conditions) -> (Optional) Add Allowlist for phases (also called Whitelist) -> [POST] /Collection/{id}/Mint\n\n#### Resyncing\n\nUpdate existing tokens -> Update token attributes -> Update images and media for token -> Update placeholder -> Update collection level metadata -> Reveal collection -> Update Max Token Supply -> Update phases -> and much more ... (soon) -> [POST] /Collection/{id}/Resync\n\n#### Distribution\n\n- Claim tokens on-chain\n- Issue token on demand\n- Issue pre-minted token with Lock mechanism (ideal for FIAT)\n- airdrop, gift and much more coming soon\n\nMore details: [Publishing API documentation](https://docs.aspenft.io/docs/introduction)",
     "version": "v1"
   },
   "paths": {
@@ -1406,16 +1406,26 @@
           "content": {
             "multipart/form-data": {
               "schema": {
+                "required": [
+                  "File",
+                  "FileType"
+                ],
                 "type": "object",
                 "properties": {
-                  "dtoFile": {
+                  "File": {
                     "type": "string",
                     "format": "binary"
+                  },
+                  "FileType": {
+                    "$ref": "#/components/schemas/FileType"
                   }
                 }
               },
               "encoding": {
-                "dtoFile": {
+                "File": {
+                  "style": "form"
+                },
+                "FileType": {
                   "style": "form"
                 }
               }
@@ -1502,6 +1512,61 @@
                 }
               }
             }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collection"
+        ],
+        "summary": "Put a customer resource url as a placeholder, where id is Collection id and index starts from 0. Uploading for the same index will replace the existing file.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
           }
         }
       },
@@ -3438,16 +3503,26 @@
           "content": {
             "multipart/form-data": {
               "schema": {
+                "required": [
+                  "File",
+                  "FileType"
+                ],
                 "type": "object",
                 "properties": {
-                  "dtoFile": {
+                  "File": {
                     "type": "string",
                     "format": "binary"
+                  },
+                  "FileType": {
+                    "$ref": "#/components/schemas/FileType"
                   }
                 }
               },
               "encoding": {
-                "dtoFile": {
+                "File": {
+                  "style": "form"
+                },
+                "FileType": {
                   "style": "form"
                 }
               }
@@ -5491,7 +5566,7 @@
         "tags": [
           "Token"
         ],
-        "summary": "Get a list of files (IPFS Url) for this token",
+        "summary": "Get a list of files for this token",
         "parameters": [
           {
             "name": "id",
@@ -5566,16 +5641,26 @@
           "content": {
             "multipart/form-data": {
               "schema": {
+                "required": [
+                  "File",
+                  "FileType"
+                ],
                 "type": "object",
                 "properties": {
-                  "dtoFile": {
+                  "File": {
                     "type": "string",
                     "format": "binary"
+                  },
+                  "FileType": {
+                    "$ref": "#/components/schemas/FileType"
                   }
                 }
               },
               "encoding": {
-                "dtoFile": {
+                "File": {
+                  "style": "form"
+                },
+                "FileType": {
                   "style": "form"
                 }
               }
@@ -5665,6 +5750,61 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Token"
+        ],
+        "summary": "Put a customer resource url as a file to a token by its index",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "index",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PutFileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Token"
@@ -5693,6 +5833,56 @@
         "responses": {
           "200": {
             "description": "Success"
+          }
+        }
+      }
+    },
+    "/Utility/Files": {
+      "post": {
+        "tags": [
+          "Utility"
+        ],
+        "operationId": "PostUtilityFiles",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "file": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
           }
         }
       }
@@ -6465,6 +6655,9 @@
           },
           "status": {
             "$ref": "#/components/schemas/FileStatus"
+          },
+          "fileType": {
+            "$ref": "#/components/schemas/FileType"
           }
         },
         "additionalProperties": false
@@ -6480,7 +6673,16 @@
         "enum": [
           "Local",
           "Uploading",
-          "Uploaded"
+          "Uploaded",
+          "ClientProvided"
+        ],
+        "type": "string"
+      },
+      "FileType": {
+        "enum": [
+          "Image",
+          "Media",
+          "Other"
         ],
         "type": "string"
       },
@@ -6856,6 +7058,30 @@
           }
         },
         "additionalProperties": {}
+      },
+      "PutFileRequest": {
+        "required": [
+          "contentType",
+          "extension",
+          "fileType",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "extension": {
+            "type": "string"
+          },
+          "fileType": {
+            "$ref": "#/components/schemas/FileType"
+          }
+        },
+        "additionalProperties": false
       },
       "QueueStatus": {
         "enum": [
