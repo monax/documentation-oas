@@ -1407,25 +1407,25 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "File",
-                  "FileType"
+                  "file",
+                  "fileType"
                 ],
                 "type": "object",
                 "properties": {
-                  "File": {
+                  "file": {
                     "type": "string",
                     "format": "binary"
                   },
-                  "FileType": {
+                  "fileType": {
                     "$ref": "#/components/schemas/FileType"
                   }
                 }
               },
               "encoding": {
-                "File": {
+                "file": {
                   "style": "form"
                 },
-                "FileType": {
+                "fileType": {
                   "style": "form"
                 }
               }
@@ -1969,25 +1969,25 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "File",
-                  "FileType"
+                  "file",
+                  "fileType"
                 ],
                 "type": "object",
                 "properties": {
-                  "File": {
+                  "file": {
                     "type": "string",
                     "format": "binary"
                   },
-                  "FileType": {
+                  "fileType": {
                     "$ref": "#/components/schemas/FileType"
                   }
                 }
               },
               "encoding": {
-                "File": {
+                "file": {
                   "style": "form"
                 },
-                "FileType": {
+                "fileType": {
                   "style": "form"
                 }
               }
@@ -2988,6 +2988,102 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/BadRequestResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Collection/{id}/Pause": {
+      "post": {
+        "tags": [
+          "Collection Actions"
+        ],
+        "summary": "Pause calims for a collection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Collection/{id}/Unpause": {
+      "post": {
+        "tags": [
+          "Collection Actions"
+        ],
+        "summary": "Unpause calims for a collection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActionResponse"
                 }
               }
             }
@@ -5823,25 +5919,25 @@
             "multipart/form-data": {
               "schema": {
                 "required": [
-                  "File",
-                  "FileType"
+                  "file",
+                  "fileType"
                 ],
                 "type": "object",
                 "properties": {
-                  "File": {
+                  "file": {
                     "type": "string",
                     "format": "binary"
                   },
-                  "FileType": {
+                  "fileType": {
                     "$ref": "#/components/schemas/FileType"
                   }
                 }
               },
               "encoding": {
-                "File": {
+                "file": {
                   "style": "form"
                 },
-                "FileType": {
+                "fileType": {
                   "style": "form"
                 }
               }
@@ -6028,6 +6124,9 @@
           "content": {
             "multipart/form-data": {
               "schema": {
+                "required": [
+                  "file"
+                ],
                 "type": "object",
                 "properties": {
                   "file": {
@@ -6071,6 +6170,19 @@
   },
   "components": {
     "schemas": {
+      "ActionResponse": {
+        "type": "object",
+        "properties": {
+          "ok": {
+            "type": "boolean"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "AuditResponse": {
         "type": "object",
         "properties": {
