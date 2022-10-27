@@ -1145,12 +1145,17 @@
         "additionalProperties": false
       },
       "CreateRoleRequest": {
+        "required": [
+          "matchType",
+          "name",
+          "priority",
+          "requiredQuantity"
+        ],
         "type": "object",
         "properties": {
           "name": {
             "type": "string",
-            "description": "Role name, which will be returned in the JTW token",
-            "nullable": true
+            "description": "Role name, which will be returned in the JTW token"
           },
           "matchType": {
             "$ref": "#/components/schemas/RoleMatchType"
@@ -1185,6 +1190,13 @@
         "additionalProperties": false
       },
       "GateResponse": {
+        "required": [
+          "clientId",
+          "id",
+          "name",
+          "signInMode",
+          "type"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1192,12 +1204,10 @@
             "format": "uuid"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "clientId": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "secretKey": {
             "type": "string",
@@ -1226,6 +1236,9 @@
         "type": "string"
       },
       "NotFoundResult": {
+        "required": [
+          "statusCode"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1236,6 +1249,9 @@
         "additionalProperties": false
       },
       "OkResult": {
+        "required": [
+          "statusCode"
+        ],
         "type": "object",
         "properties": {
           "statusCode": {
@@ -1281,6 +1297,14 @@
         "type": "string"
       },
       "RoleResponse": {
+        "required": [
+          "gateId",
+          "id",
+          "matchType",
+          "name",
+          "priority",
+          "requiredQuantity"
+        ],
         "type": "object",
         "properties": {
           "id": {
@@ -1292,8 +1316,7 @@
             "format": "uuid"
           },
           "name": {
-            "type": "string",
-            "nullable": true
+            "type": "string"
           },
           "chainId": {
             "type": "string",
@@ -1337,17 +1360,22 @@
         "additionalProperties": false
       },
       "SignpadResponse": {
+        "required": [
+          "signpad"
+        ],
         "type": "object",
         "properties": {
           "signpad": {
             "type": "string",
-            "description": "Message intented to be displayed in the wallet UI and signed by the end user",
-            "nullable": true
+            "description": "Message intented to be displayed in the wallet UI and signed by the end user"
           }
         },
         "additionalProperties": false
       },
       "ValidationProblemDetails": {
+        "required": [
+          "errors"
+        ],
         "type": "object",
         "properties": {
           "type": {
@@ -1378,8 +1406,7 @@
               "items": {
                 "type": "string"
               }
-            },
-            "nullable": true
+            }
           }
         },
         "additionalProperties": {}
