@@ -2,7 +2,7 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Publishing API",
-    "description": "#### Deploy Contract\nCreate Collection -> Set CollectionInfo (collection level metadata) -> Set up Sale and Royalty Recipients -> (Optional) Add Terms -> [POST] /Collection/{id}/Deploy\n\n#### Lazy Minting Tokens\n\nAdd Tokens -> Add Token Attributes -> Add main image -> (Optional) Add placeholder token + placeholder attributes + placeholder image -> (Optional) Add media file for token (music, video, animation) -> (Optional) Add additional images for token (carousel of images) -> Add phase/s for tokens (on chain claim conditions) -> (Optional) Add Allowlist for phases (also called Whitelist) -> [POST] /Collection/{id}/Mint\n\n#### Resyncing\n\nUpdate existing tokens -> Update token attributes -> Update images and media for token -> Update placeholder -> Update collection level metadata -> Reveal collection -> Update Max Token Supply -> Update phases -> and much more ... (soon) -> [POST] /Collection/{id}/Resync\n\n#### Distribution\n\n- Claim tokens on-chain\n- Issue token on demand\n- Issue pre-minted token with Lock mechanism (ideal for FIAT)\n- airdrop, gift and much more coming soon\n\nMore details: [Publishing API documentation](https://docs.aspenft.io/docs/introduction)",
+    "description": "#### Deploy Contract\n\nCreate Collection -> Set CollectionInfo (collection level metadata) -> Set up Sale and Royalty Recipients -> (Optional)\nAdd Terms -> [POST] /Collection/{id}/Deploy\n\n#### Lazy Minting Tokens\n\nAdd Tokens -> Add Token Attributes -> Add main image -> (Optional) Add placeholder token + placeholder attributes +\nplaceholder image -> (Optional) Add media file for token (music, video, animation) -> (Optional) Add additional images\nfor token (carousel of images) -> Add phase/s for tokens (on chain claim conditions) -> (Optional) Add Allowlist for\nphases (also called Whitelist) -> [POST] /Collection/{id}/Mint\n\n#### Resyncing\n\nUpdate existing tokens -> Update token attributes -> Update images and media for token -> Update placeholder -> Update\ncollection level metadata -> Reveal collection -> Update Max Token Supply -> Update phases -> and much more ... (soon)\n-> [POST] /Collection/{id}/Resync\n\n#### Distribution\n\n- Claim tokens on-chain\n- Issue token on demand\n- Issue pre-minted token with Lock mechanism (ideal for FIAT)\n- airdrop, gift and much more coming soon\n\nMore details: [Publishing API documentation](https://docs.aspenft.io/docs/introduction)",
     "version": "v1"
   },
   "paths": {
@@ -129,8 +129,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -422,8 +422,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -461,8 +461,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -470,22 +470,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+                "$ref": "#/components/schemas/UpdatableCollectionFieldsJsonPatchDocument"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+                "$ref": "#/components/schemas/UpdatableCollectionFieldsJsonPatchDocument"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+                "$ref": "#/components/schemas/UpdatableCollectionFieldsJsonPatchDocument"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequestJsonPatchDocument"
+                "$ref": "#/components/schemas/UpdatableCollectionFieldsJsonPatchDocument"
               }
             }
           }
@@ -584,8 +584,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -593,22 +593,22 @@
           "content": {
             "application/json-patch+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequest"
+                "$ref": "#/components/schemas/UpdatableCollectionFields"
               }
             },
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequest"
+                "$ref": "#/components/schemas/UpdatableCollectionFields"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequest"
+                "$ref": "#/components/schemas/UpdatableCollectionFields"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/UpdateCollectionRequest"
+                "$ref": "#/components/schemas/UpdatableCollectionFields"
               }
             }
           }
@@ -707,8 +707,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -731,8 +731,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -877,8 +877,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1024,8 +1024,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -1122,8 +1122,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1252,8 +1252,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -1301,8 +1301,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -1350,8 +1350,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1454,8 +1454,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1493,8 +1493,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1539,8 +1539,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1600,8 +1600,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -1738,8 +1738,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -1793,8 +1793,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -1863,8 +1863,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -1980,8 +1980,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2061,8 +2061,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2162,8 +2162,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -2282,8 +2282,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2407,227 +2407,124 @@
         }
       }
     },
-    "/Collection/{id}/Metadata/Export": {
+    "/Collection/{id}/UpdatableFields": {
       "get": {
         "tags": [
           "Collection"
         ],
-        "summary": "Download token metadata for specified collection",
+        "summary": "Get the collection updatable fields based on contract and current state",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/Collection/{id}/Metadata/Import": {
-      "post": {
-        "tags": [
-          "Collection"
-        ],
-        "summary": "Upload token metadata for specified collection",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "zipFile": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              },
-              "encoding": {
-                "zipFile": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/Collection/{id}/ImportCsv": {
-      "post": {
-        "tags": [
-          "Collection"
-        ],
-        "summary": "Import multiple tokens from csv",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "csvFile": {
-                    "type": "string",
-                    "format": "binary"
-                  }
-                }
-              },
-              "encoding": {
-                "csvFile": {
-                  "style": "form"
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
-    "/Collection/{id}/Tokens/Import": {
-      "get": {
-        "tags": [
-          "Collection"
-        ],
-        "summary": "TODO: Get status of a import session with files uploaded and their hash etc",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Collection"
-        ],
-        "summary": "TODO: Upload files for a specified collection",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "multipart/form-data": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "files": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "uniqueItems": true,
                     "type": "array",
                     "items": {
-                      "type": "string",
-                      "format": "binary"
+                      "type": "string"
                     }
                   }
                 }
               },
-              "encoding": {
-                "files": {
-                  "style": "form"
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "uniqueItems": true,
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "uniqueItems": true,
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
                 }
               }
             }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Collection"
-        ],
-        "summary": "TODO: Commit changes based on uploaded files",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Collection"
-        ],
-        "summary": "TODO: Discard any previously started (but not committed) bulk upload session.",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              }
+            }
           }
         }
       }
@@ -2644,8 +2541,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2683,8 +2580,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2764,8 +2661,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2803,8 +2700,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2904,8 +2801,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -2943,8 +2840,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3044,8 +2941,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -3094,8 +2991,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3212,15 +3109,15 @@
         "tags": [
           "Collection Actions"
         ],
-        "summary": "Pause calims for a collection",
+        "summary": "Pause claims for a collection",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -3260,15 +3157,15 @@
         "tags": [
           "Collection Actions"
         ],
-        "summary": "Unpause calims for a collection",
+        "summary": "Unpause claims for a collection",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -3303,20 +3200,565 @@
         }
       }
     },
-    "/Collection/{id}/Info": {
+    "/Collection/{id}/Metadata/Export": {
       "get": {
         "tags": [
-          "Collection Info"
+          "Collection Export Import"
         ],
-        "operationId": "GetInfo",
+        "summary": "Download token metadata for specified collection",
         "parameters": [
           {
             "name": "id",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Collection/{id}/Metadata/Import": {
+      "post": {
+        "tags": [
+          "Collection Export Import"
+        ],
+        "summary": "Upload token metadata for specified collection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "zipFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "zipFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Collection/{id}/ImportCsv": {
+      "post": {
+        "tags": [
+          "Collection Export Import"
+        ],
+        "summary": "Import multiple tokens from csv",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "csvFile": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "csvFile": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/Collection/{id}/Tokens/Import": {
+      "get": {
+        "tags": [
+          "Collection Export Import"
+        ],
+        "summary": "Get status of a import session with files uploaded and their hash etc",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Collection Export Import"
+        ],
+        "summary": "Upload files for a specified collection",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "required": [
+                  "files"
+                ],
+                "type": "object",
+                "properties": {
+                  "files": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "format": "binary"
+                    }
+                  }
+                }
+              },
+              "encoding": {
+                "files": {
+                  "style": "form"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FileState"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FileState"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FileState"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Collection Export Import"
+        ],
+        "summary": "Commit changes based on uploaded files",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Collection Export Import"
+        ],
+        "summary": "Discard any previously started (but not committed) bulk upload session.",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BulkUploadResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedResult"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestResult"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Collection/{id}/Info": {
+      "get": {
+        "tags": [
+          "Collection Info"
+        ],
+        "operationId": "GetCollectionInfo",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3353,8 +3795,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3437,8 +3879,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3520,8 +3962,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3560,8 +4002,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3640,8 +4082,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3721,8 +4163,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3825,16 +4267,16 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
             "name": "tokenId",
             "in": "query",
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -3924,8 +4366,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -3933,8 +4375,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4012,8 +4454,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4021,8 +4463,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4144,8 +4586,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4153,8 +4595,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4178,8 +4620,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4187,8 +4629,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4277,8 +4719,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4286,8 +4728,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4359,15 +4801,15 @@
           "Collection/Token Phases"
         ],
         "summary": "Post a collection whitelist by collection and Phase ID - JSON body",
-        "operationId": "PostPhaseWhitelistJSON",
+        "operationId": "PostPhaseWhitelistJson",
         "parameters": [
           {
             "name": "collectionId",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4375,8 +4817,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4494,8 +4936,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4503,8 +4945,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4602,8 +5044,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4611,8 +5053,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -4752,8 +5194,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -4761,8 +5203,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5057,8 +5499,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5112,8 +5554,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5166,8 +5608,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5231,8 +5673,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5487,8 +5929,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5526,8 +5968,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5575,8 +6017,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -5626,8 +6068,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -5635,8 +6077,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5717,8 +6159,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5807,8 +6249,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5855,8 +6297,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -5970,8 +6412,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -6030,8 +6472,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -6062,8 +6504,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           }
         ],
@@ -6112,8 +6554,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -6250,8 +6692,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -6305,8 +6747,8 @@
             "in": "path",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int32"
+              "type": "string",
+              "format": "uuid"
             }
           },
           {
@@ -6395,24 +6837,6 @@
         },
         "additionalProperties": false
       },
-      "AnalyticsPhaseTally": {
-        "type": "object",
-        "properties": {
-          "Free Mint": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Public Mint": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "Pre-mint": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "AuditResponse": {
         "type": "object",
         "properties": {
@@ -6482,6 +6906,78 @@
           "statusCode": {
             "type": "integer",
             "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "BulkUploadResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "media": {
+            "$ref": "#/components/schemas/Progress"
+          },
+          "token": {
+            "$ref": "#/components/schemas/Progress"
+          },
+          "uploads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileStateResponse"
+            },
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/SessionState"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "BulkUploadState": {
+        "type": "object",
+        "properties": {
+          "guid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "media": {
+            "$ref": "#/components/schemas/Progress"
+          },
+          "token": {
+            "$ref": "#/components/schemas/Progress"
+          },
+          "uploads": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FileState"
+            },
+            "nullable": true
+          },
+          "status": {
+            "$ref": "#/components/schemas/SessionState"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -6569,32 +7065,29 @@
         "type": "string"
       },
       "CollectionInfoRequest": {
-        "required": [
-          "collectionCategories",
-          "collectionDescription",
-          "creatorsInfo",
-          "explicitContent",
-          "externalLink"
-        ],
         "type": "object",
         "properties": {
           "collectionDescription": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "externalLink": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "collectionCategories": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CollectionInfoCategories"
-            }
+            },
+            "nullable": true
           },
           "creatorsInfo": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/CreatorInfo"
-            }
+            },
+            "nullable": true
           },
           "explicitContent": {
             "type": "boolean"
@@ -6718,6 +7211,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "guid": {
+            "type": "string",
+            "format": "uuid"
+          },
           "name": {
             "type": "string",
             "nullable": true
@@ -6836,6 +7333,10 @@
           "maxPage": {
             "type": "integer",
             "format": "int32"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -6888,17 +7389,17 @@
           "maxPage": {
             "type": "integer",
             "format": "int32"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
       },
       "CreateCollectionRequest": {
         "required": [
-          "chain",
-          "contractName",
-          "maxTokens",
-          "name",
-          "symbol"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -6906,7 +7407,8 @@
             "type": "string"
           },
           "symbol": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "chain": {
             "$ref": "#/components/schemas/Chain"
@@ -6916,7 +7418,8 @@
             "format": "int32"
           },
           "contractName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "visibility": {
             "$ref": "#/components/schemas/CollectionVisibility"
@@ -6964,8 +7467,8 @@
         "type": "object",
         "properties": {
           "collectionId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uuid"
           },
           "name": {
             "type": "string"
@@ -6996,11 +7499,11 @@
       "CreatorInfo": {
         "type": "object",
         "properties": {
-          "creator_name": {
+          "creatorName": {
             "type": "string",
             "nullable": true
           },
-          "creator_email": {
+          "creatorEmail": {
             "type": "string",
             "nullable": true
           }
@@ -7097,8 +7600,8 @@
         "type": "object",
         "properties": {
           "collectionId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uuid"
           },
           "toAddress": {
             "type": "string"
@@ -7153,6 +7656,15 @@
         },
         "additionalProperties": false
       },
+      "FileProcessingStatus": {
+        "enum": [
+          "Pending",
+          "Processing",
+          "Processed",
+          "Error"
+        ],
+        "type": "string"
+      },
       "FileResponse": {
         "type": "object",
         "properties": {
@@ -7191,6 +7703,101 @@
           "Web2"
         ],
         "type": "string"
+      },
+      "FileState": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "guid": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "bulkUploadStateId": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "bulkUploadState": {
+            "$ref": "#/components/schemas/BulkUploadState"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "$ref": "#/components/schemas/FileProcessingStatus"
+          },
+          "hash": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileType": {
+            "$ref": "#/components/schemas/ImportFileType"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "FileStateResponse": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "contentType": {
+            "type": "string",
+            "nullable": true
+          },
+          "extension": {
+            "type": "string",
+            "nullable": true
+          },
+          "length": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "status": {
+            "$ref": "#/components/schemas/FileProcessingStatus"
+          },
+          "hash": {
+            "type": "string",
+            "nullable": true
+          },
+          "fileType": {
+            "$ref": "#/components/schemas/ImportFileType"
+          },
+          "message": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
       },
       "FileStatus": {
         "enum": [
@@ -7241,6 +7848,15 @@
       "IContractResolver": {
         "type": "object",
         "additionalProperties": false
+      },
+      "ImportFileType": {
+        "enum": [
+          "Tokens",
+          "Media",
+          "Metadata",
+          "Invalid"
+        ],
+        "type": "string"
       },
       "IssuanceStatus": {
         "enum": [
@@ -7309,8 +7925,8 @@
         "type": "object",
         "properties": {
           "collectionId": {
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "uuid"
           },
           "toAddress": {
             "type": "string"
@@ -7386,25 +8002,47 @@
       "MintAnalyticsResponse": {
         "type": "object",
         "properties": {
-          "phase_tally": {
-            "$ref": "#/components/schemas/AnalyticsPhaseTally"
-          },
-          "price_tally": {
+          "phaseTally": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
             "nullable": true
           },
-          "free_mints": {
+          "priceTally": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "nullable": true
+          },
+          "freeMints": {
             "type": "integer",
             "format": "int32"
           },
-          "paid_mints": {
+          "paidMints": {
             "type": "integer",
             "format": "int32"
           },
-          "total_proceeds": {
+          "totalMints": {
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
-          "contract_address": {
+          "totalProceeds": {
+            "type": "string",
+            "nullable": true
+          },
+          "royaltyFee": {
+            "type": "number",
+            "format": "float"
+          },
+          "maxAvailableTokens": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "contractAddress": {
             "type": "string",
             "nullable": true
           },
@@ -7412,11 +8050,11 @@
             "type": "string",
             "nullable": true
           },
-          "chain_id": {
+          "chainId": {
             "type": "string",
             "nullable": true
           },
-          "chain_name": {
+          "chainName": {
             "type": "string",
             "nullable": true
           }
@@ -7526,6 +8164,10 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "guid": {
+            "type": "string",
+            "format": "uuid"
           },
           "collectionId": {
             "type": "integer",
@@ -7683,6 +8325,20 @@
         },
         "additionalProperties": {}
       },
+      "Progress": {
+        "type": "object",
+        "properties": {
+          "total": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "done": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
       "PutFileRequest": {
         "required": [
           "contentType",
@@ -7730,6 +8386,17 @@
           }
         },
         "additionalProperties": false
+      },
+      "SessionState": {
+        "enum": [
+          "NewSession",
+          "Uploading",
+          "InQueue",
+          "Processing",
+          "Error",
+          "Completed"
+        ],
+        "type": "string"
       },
       "SignatureResult": {
         "type": "object",
@@ -7805,6 +8472,10 @@
             "format": "int32"
           },
           "maxPage": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "totalItems": {
             "type": "integer",
             "format": "int32"
           }
@@ -7968,6 +8639,10 @@
             "type": "integer",
             "format": "int32"
           },
+          "guid": {
+            "type": "string",
+            "format": "uuid"
+          },
           "tokenId": {
             "type": "integer",
             "description": "On chain Id for this token",
@@ -8023,6 +8698,10 @@
           "maxPage": {
             "type": "integer",
             "format": "int32"
+          },
+          "totalItems": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "additionalProperties": false
@@ -8070,12 +8749,9 @@
         },
         "additionalProperties": false
       },
-      "UpdateCollectionRequest": {
+      "UpdatableCollectionFields": {
         "required": [
-          "contractName",
-          "maxTokens",
-          "name",
-          "symbol"
+          "name"
         ],
         "type": "object",
         "properties": {
@@ -8083,14 +8759,16 @@
             "type": "string"
           },
           "symbol": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "maxTokens": {
             "type": "integer",
             "format": "int32"
           },
           "contractName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "visibility": {
             "$ref": "#/components/schemas/CollectionVisibility"
@@ -8100,8 +8778,7 @@
           },
           "defaultLockTime": {
             "type": "integer",
-            "format": "int32",
-            "example": 3600
+            "format": "int32"
           },
           "chain": {
             "type": "string",
@@ -8113,7 +8790,6 @@
           },
           "mintingWalletAddress": {
             "type": "string",
-            "description": "If minting wallet is set, distribution api will fail",
             "nullable": true
           },
           "limitMaxClaim": {
@@ -8134,13 +8810,13 @@
         },
         "additionalProperties": false
       },
-      "UpdateCollectionRequestJsonPatchDocument": {
+      "UpdatableCollectionFieldsJsonPatchDocument": {
         "type": "object",
         "properties": {
           "operations": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/UpdateCollectionRequestOperation"
+              "$ref": "#/components/schemas/UpdatableCollectionFieldsOperation"
             },
             "nullable": true
           },
@@ -8150,7 +8826,7 @@
         },
         "additionalProperties": false
       },
-      "UpdateCollectionRequestOperation": {
+      "UpdatableCollectionFieldsOperation": {
         "type": "object",
         "properties": {
           "operationType": {
@@ -8234,6 +8910,10 @@
           "id": {
             "type": "integer",
             "format": "int32"
+          },
+          "guid": {
+            "type": "string",
+            "format": "uuid"
           },
           "addresses": {
             "type": "object",
