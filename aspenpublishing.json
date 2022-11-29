@@ -6,7 +6,7 @@
     "version": "v1"
   },
   "paths": {
-    "/Analytics": {
+    "/analytics": {
       "get": {
         "tags": [
           "Analytics"
@@ -116,7 +116,7 @@
         }
       }
     },
-    "/Collection/{id}/Analytics": {
+    "/collection/{guid}/analytics": {
       "get": {
         "tags": [
           "Analytics"
@@ -125,7 +125,7 @@
         "operationId": "GetCollectionAnalytics",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -218,7 +218,7 @@
         }
       }
     },
-    "/Auth": {
+    "/auth": {
       "post": {
         "tags": [
           "Auth"
@@ -316,7 +316,7 @@
         }
       }
     },
-    "/Collection": {
+    "/collection": {
       "post": {
         "tags": [
           "Collection"
@@ -409,7 +409,7 @@
         }
       }
     },
-    "/Collection/{id}": {
+    "/collection/{guid}": {
       "get": {
         "tags": [
           "Collection"
@@ -418,7 +418,7 @@
         "operationId": "GetCollectionById",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -457,7 +457,7 @@
         "summary": "Patch a collection by ID, using the JSON Patch format.\r\nThis endpoint can be used to update a collection pre or post-deploy.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -580,7 +580,7 @@
         "summary": "Update a collection by Id",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -703,7 +703,7 @@
         "summary": "Delete a collection by Id",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -719,7 +719,7 @@
         }
       }
     },
-    "/Collection/{id}/SaleRecipients": {
+    "/collection/{guid}/salerecipients": {
       "post": {
         "tags": [
           "Collection"
@@ -727,7 +727,7 @@
         "summary": "Set the sale recipient address along with their shares",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -865,7 +865,7 @@
         }
       }
     },
-    "/Collection/{id}/RoyaltyRecipients": {
+    "/collection/{guid}/royaltyrecipients": {
       "post": {
         "tags": [
           "Collection"
@@ -873,7 +873,7 @@
         "summary": "Set the royalty recipient address along with their shares",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1011,7 +1011,7 @@
         }
       }
     },
-    "/Collection/{id}/Tokens": {
+    "/collection/{guid}/tokens": {
       "get": {
         "tags": [
           "Collection"
@@ -1020,7 +1020,7 @@
         "operationId": "TokensOfCollection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1110,7 +1110,7 @@
         }
       }
     },
-    "/Collection/{id}/Terms": {
+    "/collection/{guid}/terms": {
       "post": {
         "tags": [
           "Collection"
@@ -1118,7 +1118,7 @@
         "summary": "Upload user terms file",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1153,26 +1153,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserTermsResponse"
-                  }
+                  "$ref": "#/components/schemas/UserTermsResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserTermsResponse"
-                  }
+                  "$ref": "#/components/schemas/UserTermsResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/UserTermsResponse"
-                  }
+                  "$ref": "#/components/schemas/UserTermsResponse"
                 }
               }
             }
@@ -1240,7 +1231,7 @@
         }
       }
     },
-    "/Collection/{id}/Terms/Enable/{status}": {
+    "/collection/{guid}/terms/enable/{status}": {
       "post": {
         "tags": [
           "Collection"
@@ -1248,7 +1239,7 @@
         "summary": "Enable or disable accept terms",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1289,7 +1280,7 @@
         }
       }
     },
-    "/Collection/{id}/Terms/{address}": {
+    "/collection/{guid}/terms/{address}": {
       "get": {
         "tags": [
           "Collection"
@@ -1297,7 +1288,7 @@
         "summary": "Check if an user has signed the terms",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1338,7 +1329,7 @@
         }
       }
     },
-    "/Collection/{id}/Placeholder": {
+    "/collection/{guid}/placeholder": {
       "post": {
         "tags": [
           "Collection"
@@ -1346,7 +1337,7 @@
         "summary": "Create Placeholder for a collection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1450,7 +1441,7 @@
         "operationId": "GetPlaceholderById",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1489,7 +1480,7 @@
         "summary": "Update a placeholder by Collection Id",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1535,7 +1526,7 @@
         "summary": "Delete a placeholder",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1588,7 +1579,7 @@
         }
       }
     },
-    "/Collection/{id}/Placeholder/Files/{index}": {
+    "/collection/{guid}/placeholder/files/{index}": {
       "post": {
         "tags": [
           "Collection"
@@ -1596,7 +1587,7 @@
         "summary": "Upload a file for the placeholder, where id is Collection id and index starts from 0. Uploading for the same index will replace the existing file.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1734,7 +1725,7 @@
         "summary": "Put a customer resource url as a placeholder, where id is Collection id and index starts from 0. Uploading for the same index will replace the existing file.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1789,7 +1780,7 @@
         "summary": "Delete a file from the placeholder by it's index",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1851,7 +1842,7 @@
         }
       }
     },
-    "/Collection/{id}/Placeholder/Attributes": {
+    "/collection/{guid}/placeholder/attributes": {
       "post": {
         "tags": [
           "Collection"
@@ -1859,7 +1850,7 @@
         "summary": "Update the placeholder attributes, it will replace all existing attributes of the placeholder",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -1968,7 +1959,7 @@
         }
       }
     },
-    "/Collection/{id}/Audit": {
+    "/collection/{guid}/audit": {
       "get": {
         "tags": [
           "Collection"
@@ -1976,7 +1967,7 @@
         "summary": "Check if collection is ready for deploying, minting or re-syncing\r\nReturns a list of invalid fields and tokens that must be addressed",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2049,7 +2040,7 @@
         }
       }
     },
-    "/Collection/{id}/Availability": {
+    "/collection/{guid}/availability": {
       "get": {
         "tags": [
           "Collection"
@@ -2057,7 +2048,7 @@
         "summary": "Returns a list of tokens available for specified collection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2150,7 +2141,7 @@
         }
       }
     },
-    "/Collection/{id}/Files/{index}": {
+    "/collection/{guid}/files/{index}": {
       "post": {
         "tags": [
           "Collection"
@@ -2158,7 +2149,7 @@
         "summary": "Upload a file for all the tokens in collection.\r\nUploading for the same index will replace the existing file.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2270,7 +2261,7 @@
         }
       }
     },
-    "/Collection/{id}/Attributes/Generate": {
+    "/collection/{guid}/attributes/generate": {
       "patch": {
         "tags": [
           "Collection"
@@ -2278,7 +2269,7 @@
         "summary": "Generate attributes for given collection from provided trait options randomly",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2407,7 +2398,7 @@
         }
       }
     },
-    "/Collection/{id}/UpdatableFields": {
+    "/collection/{guid}/updatablefields": {
       "get": {
         "tags": [
           "Collection"
@@ -2415,7 +2406,7 @@
         "summary": "Get the collection updatable fields based on contract and current state",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2529,7 +2520,7 @@
         }
       }
     },
-    "/Collection/{id}/Deploy": {
+    "/collection/{guid}/deploy": {
       "get": {
         "tags": [
           "Collection Actions"
@@ -2537,7 +2528,7 @@
         "summary": "Get deployment status",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2576,7 +2567,7 @@
         "summary": "Deploy the collection contract and it's dependencies.\r\nThis endpoint needs updating once contract is finalized.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2649,7 +2640,7 @@
         }
       }
     },
-    "/Collection/{id}/Mint": {
+    "/collection/{guid}/mint": {
       "get": {
         "tags": [
           "Collection Actions"
@@ -2657,7 +2648,7 @@
         "summary": "Get minting status",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2696,7 +2687,7 @@
         "summary": "Start minting tokens of the collection, Will also update already minted tokens.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2789,7 +2780,7 @@
         }
       }
     },
-    "/Collection/{id}/Resync": {
+    "/collection/{guid}/resync": {
       "get": {
         "tags": [
           "Collection Actions"
@@ -2797,7 +2788,7 @@
         "summary": "Get resync status",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2836,7 +2827,7 @@
         "summary": "Start updating the minted tokens. Will not mint new tokens.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2929,7 +2920,7 @@
         }
       }
     },
-    "/Collection/{id}/Issue/{issuanceId}": {
+    "/collection/{guid}/issue/{issuanceId}": {
       "get": {
         "tags": [
           "Collection Actions"
@@ -2937,7 +2928,7 @@
         "summary": "Get issue status for a collection for a given requestId.\r\nRequestId is returned when you request an issue.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -2979,7 +2970,7 @@
         }
       }
     },
-    "/Collection/{id}/Issue": {
+    "/collection/{guid}/issue": {
       "post": {
         "tags": [
           "Collection Actions"
@@ -2987,7 +2978,7 @@
         "summary": "Verify that issue request is valid and start a issuance process.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3104,7 +3095,7 @@
         }
       }
     },
-    "/Collection/{id}/Pause": {
+    "/collection/{guid}/pause": {
       "post": {
         "tags": [
           "Collection Actions"
@@ -3112,7 +3103,7 @@
         "summary": "Pause claims for a collection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3152,7 +3143,7 @@
         }
       }
     },
-    "/Collection/{id}/Unpause": {
+    "/collection/{guid}/unpause": {
       "post": {
         "tags": [
           "Collection Actions"
@@ -3160,7 +3151,7 @@
         "summary": "Unpause claims for a collection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3200,7 +3191,7 @@
         }
       }
     },
-    "/Collection/{id}/Metadata/Export": {
+    "/collection/{guid}/metadata/export": {
       "get": {
         "tags": [
           "Collection Export Import"
@@ -3208,7 +3199,7 @@
         "summary": "Download token metadata for specified collection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3224,7 +3215,7 @@
         }
       }
     },
-    "/Collection/{id}/Metadata/Import": {
+    "/collection/{guid}/metadata/import": {
       "post": {
         "tags": [
           "Collection Export Import"
@@ -3232,7 +3223,7 @@
         "summary": "Upload token metadata for specified collection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3268,7 +3259,7 @@
         }
       }
     },
-    "/Collection/{id}/ImportCsv": {
+    "/collection/{guid}/importcsv": {
       "post": {
         "tags": [
           "Collection Export Import"
@@ -3276,7 +3267,7 @@
         "summary": "Import multiple tokens from csv",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3312,7 +3303,7 @@
         }
       }
     },
-    "/Collection/{id}/Tokens/Import": {
+    "/collection/{guid}/tokens/import": {
       "get": {
         "tags": [
           "Collection Export Import"
@@ -3320,7 +3311,7 @@
         "summary": "Get status of a import session with files uploaded and their hash etc",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3419,7 +3410,7 @@
         "summary": "Upload files for a specified collection",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3553,7 +3544,7 @@
         "summary": "Commit changes based on uploaded files",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3652,7 +3643,7 @@
         "summary": "Discard any previously started (but not committed) bulk upload session.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3745,7 +3736,7 @@
         }
       }
     },
-    "/Collection/{id}/Info": {
+    "/collection/{guid}/info": {
       "get": {
         "tags": [
           "Collection Info"
@@ -3753,7 +3744,7 @@
         "operationId": "GetCollectionInfo",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3791,7 +3782,7 @@
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3868,14 +3859,14 @@
         }
       }
     },
-    "/Collection/{id}/Bundle": {
+    "/collection/{guid}/bundle": {
       "post": {
         "tags": [
           "Collection Info"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3958,7 +3949,7 @@
         "operationId": "GetCollectionBundle",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -3991,14 +3982,14 @@
         }
       }
     },
-    "/Collection/{id}/Info/Images/Logo": {
+    "/collection/{guid}/info/images/logo": {
       "post": {
         "tags": [
           "Collection Info"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4071,14 +4062,14 @@
         }
       }
     },
-    "/Collection/{id}/Info/Images/Banner": {
+    "/collection/{guid}/info/images/banner": {
       "post": {
         "tags": [
           "Collection Info"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4151,7 +4142,7 @@
         }
       }
     },
-    "/Collection/{collectionId}/Phases": {
+    "/collection/{collectionGuid}/phases": {
       "post": {
         "tags": [
           "Collection/Token Phases"
@@ -4159,7 +4150,7 @@
         "summary": "Create Phase for a collection",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4263,7 +4254,7 @@
         "operationId": "GetCollectionPhases",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4272,7 +4263,7 @@
             }
           },
           {
-            "name": "tokenId",
+            "name": "tokenGuid",
             "in": "query",
             "schema": {
               "type": "string",
@@ -4353,7 +4344,7 @@
         }
       }
     },
-    "/Collection/{collectionId}/Phases/{phaseId}": {
+    "/collection/{collectionGuid}/phases/{phaseGuid}": {
       "get": {
         "tags": [
           "Collection/Token Phases"
@@ -4362,7 +4353,7 @@
         "operationId": "GetCollectionPhaseById",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4371,7 +4362,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4450,7 +4441,7 @@
         "summary": "Update a collection phase by Id",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4459,7 +4450,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4582,7 +4573,7 @@
         "summary": "Delete a phase by Id",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4591,7 +4582,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4607,7 +4598,7 @@
         }
       }
     },
-    "/Collection/{collectionId}/Phases/{phaseId}/Proof/{address}": {
+    "/collection/{collectionGuid}/phases/{phaseGuid}/proof/{address}": {
       "get": {
         "tags": [
           "Collection/Token Phases"
@@ -4616,7 +4607,7 @@
         "operationId": "GetMerkleProofsOfAddress",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4625,7 +4616,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4706,7 +4697,7 @@
         }
       }
     },
-    "/Collection/{collectionId}/Phases/{phaseId}/Whitelist": {
+    "/collection/{collectionGuid}/phases/{phaseGuid}/whitelist": {
       "get": {
         "tags": [
           "Collection/Token Phases"
@@ -4715,7 +4706,7 @@
         "operationId": "GetPhaseWhitelist",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4724,7 +4715,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4804,7 +4795,7 @@
         "operationId": "PostPhaseWhitelistJson",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4813,7 +4804,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4932,7 +4923,7 @@
         "summary": "Delete a Whitelist by Id",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -4941,7 +4932,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5040,7 +5031,7 @@
         "summary": "Append new addresses to a Whitelist by phase Id",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5049,7 +5040,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5182,7 +5173,7 @@
         }
       }
     },
-    "/Collection/{collectionId}/Phases/{phaseId}/Whitelist/csv": {
+    "/collection/{collectionGuid}/phases/{phaseGuid}/whitelist/csv": {
       "post": {
         "tags": [
           "Collection/Token Phases"
@@ -5190,7 +5181,7 @@
         "operationId": "PostPhaseWhitelistCSV",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5199,7 +5190,7 @@
             }
           },
           {
-            "name": "phaseId",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5292,7 +5283,7 @@
         }
       }
     },
-    "/Contract": {
+    "/contract": {
       "get": {
         "tags": [
           "Contract"
@@ -5333,7 +5324,7 @@
         }
       }
     },
-    "/Contract/{contractAddress}/Proofs": {
+    "/contract/{contractAddress}/proofs": {
       "get": {
         "tags": [
           "Contract"
@@ -5418,7 +5409,7 @@
         }
       }
     },
-    "/Lock": {
+    "/lock": {
       "post": {
         "tags": [
           "Lock"
@@ -5487,7 +5478,7 @@
         }
       }
     },
-    "/Lock/{id}": {
+    "/lock/{guid}": {
       "get": {
         "tags": [
           "Lock"
@@ -5495,7 +5486,7 @@
         "summary": "Check the transfer/lock status",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5550,7 +5541,7 @@
         "description": "Doesn't delete the lock in database!",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5604,7 +5595,7 @@
         "summary": "Extend the expiry time for a specified lock",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5661,7 +5652,7 @@
         }
       }
     },
-    "/Lock/{id}/Transfer": {
+    "/lock/{guid}/transfer": {
       "post": {
         "tags": [
           "Lock"
@@ -5669,7 +5660,7 @@
         "summary": "Execute a transfer for Fiat payment type. Throws bad request error if payment type is crypto.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5717,7 +5708,7 @@
         }
       }
     },
-    "/Lock/Distribute": {
+    "/lock/distribute": {
       "post": {
         "tags": [
           "Lock"
@@ -5786,7 +5777,7 @@
         }
       }
     },
-    "/Token": {
+    "/token": {
       "post": {
         "tags": [
           "Token"
@@ -5840,7 +5831,7 @@
         }
       }
     },
-    "/Token/Batch": {
+    "/token/batch": {
       "post": {
         "tags": [
           "Token"
@@ -5916,7 +5907,7 @@
         }
       }
     },
-    "/Token/{id}": {
+    "/token/{guid}": {
       "get": {
         "tags": [
           "Token"
@@ -5925,7 +5916,7 @@
         "operationId": "GetTokenById",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -5964,7 +5955,7 @@
         "summary": "Update a token by Id",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6004,7 +5995,7 @@
         }
       }
     },
-    "/Token/{collectionId}/{tokenId}": {
+    "/token/{collectionGuid}/{tokenId}": {
       "get": {
         "tags": [
           "Token"
@@ -6013,7 +6004,7 @@
         "operationId": "GetTokenByExternalId",
         "parameters": [
           {
-            "name": "collectionId",
+            "name": "collectionGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6055,7 +6046,7 @@
         }
       }
     },
-    "/Token/{tokenId}/Phases/{id}": {
+    "/token/{tokenGuid}/phases/{phaseGuid}": {
       "get": {
         "tags": [
           "Token"
@@ -6064,7 +6055,7 @@
         "operationId": "GetTokenPhaseById",
         "parameters": [
           {
-            "name": "tokenId",
+            "name": "tokenGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6073,7 +6064,7 @@
             }
           },
           {
-            "name": "id",
+            "name": "phaseGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6146,7 +6137,7 @@
         }
       }
     },
-    "/Token/{tokenId}/Phases": {
+    "/token/{tokenGuid}/phases": {
       "get": {
         "tags": [
           "Token"
@@ -6155,7 +6146,7 @@
         "operationId": "GetTokenPhases",
         "parameters": [
           {
-            "name": "tokenId",
+            "name": "tokenGuid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6237,7 +6228,7 @@
         }
       }
     },
-    "/Token/{id}/Attributes": {
+    "/token/{guid}/attributes": {
       "get": {
         "tags": [
           "Token"
@@ -6245,7 +6236,7 @@
         "summary": "Get the token attributes",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6293,7 +6284,7 @@
         "summary": "Update the token attributes, it will replace all existing attributes",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6408,7 +6399,7 @@
         "summary": "Append token attributes, overwrite attributes with same `trait_type`",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6460,7 +6451,7 @@
         }
       }
     },
-    "/Token/{id}/Attributes/{traitType}": {
+    "/token/{guid}/attributes/{traitType}": {
       "delete": {
         "tags": [
           "Token"
@@ -6468,7 +6459,7 @@
         "summary": "Delete an attribute by `trait_type`",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6492,7 +6483,7 @@
         }
       }
     },
-    "/Token/{id}/Files": {
+    "/token/{guid}/files": {
       "get": {
         "tags": [
           "Token"
@@ -6500,7 +6491,7 @@
         "summary": "Get a list of files for this token",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6542,7 +6533,7 @@
         }
       }
     },
-    "/Token/{id}/Files/{index}": {
+    "/token/{guid}/files/{index}": {
       "post": {
         "tags": [
           "Token"
@@ -6550,7 +6541,7 @@
         "summary": "Upload a file for the token, where id is tokenId and index starts from 0. Uploading for the same index will replace the existing file.",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6688,7 +6679,7 @@
         "summary": "Put a customer resource url as a file to a token by its index",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6743,7 +6734,7 @@
         "summary": "Delete a file from the token by it's index",
         "parameters": [
           {
-            "name": "id",
+            "name": "guid",
             "in": "path",
             "required": true,
             "schema": {
@@ -6768,7 +6759,7 @@
         }
       }
     },
-    "/Utility/Files": {
+    "/utility/files": {
       "post": {
         "tags": [
           "Utility"
@@ -7043,7 +7034,7 @@
             "$ref": "#/components/schemas/CollectionInfoResponse"
           },
           "creatorToolsFields": {
-            "$ref": "#/components/schemas/CreatorToolsFields"
+            "$ref": "#/components/schemas/CreatorToolsFieldsResponse"
           }
         },
         "additionalProperties": false
@@ -7236,7 +7227,8 @@
           },
           "maxTokens": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "contractName": {
             "type": "string",
@@ -7297,10 +7289,6 @@
             "format": "int32"
           },
           "clientWallet": {
-            "type": "string",
-            "nullable": true
-          },
-          "userTermsMessage": {
             "type": "string",
             "nullable": true
           },
@@ -7415,7 +7403,8 @@
           },
           "maxTokens": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "contractName": {
             "type": "string",
@@ -7451,22 +7440,18 @@
           "clientWallet": {
             "type": "string",
             "nullable": true
-          },
-          "userTermsMessage": {
-            "type": "string",
-            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "CreateTokenRequest": {
         "required": [
-          "collectionId",
+          "collectionGuid",
           "name"
         ],
         "type": "object",
         "properties": {
-          "collectionId": {
+          "collectionGuid": {
             "type": "string",
             "format": "uuid"
           },
@@ -7485,7 +7470,8 @@
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "numberOfFiles": {
             "maximum": 2147483647,
@@ -7499,54 +7485,13 @@
       "CreatorInfo": {
         "type": "object",
         "properties": {
-          "creatorName": {
+          "creator_name": {
             "type": "string",
             "nullable": true
           },
-          "creatorEmail": {
+          "creator_email": {
             "type": "string",
             "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreatorToolsFields": {
-        "type": "object",
-        "properties": {
-          "guid": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "id": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fixedCap": {
-            "type": "boolean"
-          },
-          "phases": {
-            "type": "boolean"
-          },
-          "freeMint": {
-            "type": "boolean"
-          },
-          "phaseNumber": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "termsOfService": {
-            "type": "boolean"
-          },
-          "mintCollectionPage": {
-            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -7579,6 +7524,51 @@
           "phaseNumber": {
             "type": "integer",
             "format": "int32"
+          },
+          "isTestnet": {
+            "type": "boolean"
+          },
+          "nftMediaType": {
+            "$ref": "#/components/schemas/NftMediaType"
+          },
+          "hasPreviewImage": {
+            "type": "boolean",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreatorToolsFieldsResponse": {
+        "type": "object",
+        "properties": {
+          "fixedCap": {
+            "type": "boolean"
+          },
+          "phases": {
+            "type": "boolean"
+          },
+          "freeMint": {
+            "type": "boolean"
+          },
+          "termsOfService": {
+            "type": "boolean"
+          },
+          "mintCollectionPage": {
+            "type": "boolean"
+          },
+          "phaseNumber": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isTestnet": {
+            "type": "boolean"
+          },
+          "nftMediaType": {
+            "$ref": "#/components/schemas/NftMediaType"
+          },
+          "hasPreviewImage": {
+            "type": "boolean",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -7594,12 +7584,12 @@
       },
       "DistributeRequest": {
         "required": [
-          "collectionId",
+          "collectionGuid",
           "toAddress"
         ],
         "type": "object",
         "properties": {
-          "collectionId": {
+          "collectionGuid": {
             "type": "string",
             "format": "uuid"
           },
@@ -7919,12 +7909,12 @@
       },
       "LockRequest": {
         "required": [
-          "collectionId",
+          "collectionGuid",
           "toAddress"
         ],
         "type": "object",
         "properties": {
-          "collectionId": {
+          "collectionGuid": {
             "type": "string",
             "format": "uuid"
           },
@@ -8061,6 +8051,16 @@
         },
         "additionalProperties": false
       },
+      "NftMediaType": {
+        "enum": [
+          "Image",
+          "Video",
+          "Audio",
+          "Documents",
+          "Other"
+        ],
+        "type": "string"
+      },
       "NotFoundResult": {
         "type": "object",
         "properties": {
@@ -8113,9 +8113,7 @@
       "PhaseRequest": {
         "required": [
           "currency",
-          "maxClaimableSupply",
           "pricePerToken",
-          "quantityLimitPerTransaction",
           "startTimestamp",
           "waitTimeInSecondsBetweenClaims"
         ],
@@ -8125,10 +8123,18 @@
             "type": "string",
             "nullable": true
           },
-          "tokenId": {
-            "type": "integer",
+          "headerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "bannerButtonText": {
+            "type": "string",
+            "nullable": true
+          },
+          "tokenGuid": {
+            "type": "string",
             "description": "TokenId shall be null if you are setting a collecting wide phase",
-            "format": "int32",
+            "format": "uuid",
             "default": null,
             "nullable": true
           },
@@ -8138,11 +8144,13 @@
           },
           "maxClaimableSupply": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "quantityLimitPerTransaction": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "waitTimeInSecondsBetweenClaims": {
             "type": "integer",
@@ -8169,16 +8177,24 @@
             "type": "string",
             "format": "uuid"
           },
-          "collectionId": {
-            "type": "integer",
-            "format": "int32"
+          "collectionGuid": {
+            "type": "string",
+            "format": "uuid"
           },
-          "tokenId": {
-            "type": "integer",
-            "format": "int32",
+          "tokenGuid": {
+            "type": "string",
+            "format": "uuid",
             "nullable": true
           },
           "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "headerText": {
+            "type": "string",
+            "nullable": true
+          },
+          "bannerButtonText": {
             "type": "string",
             "nullable": true
           },
@@ -8188,7 +8204,8 @@
           },
           "maxClaimableSupply": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "supplyClaimed": {
             "type": "integer",
@@ -8196,7 +8213,8 @@
           },
           "quantityLimitPerTransaction": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "waitTimeInSecondsBetweenClaims": {
             "type": "integer",
@@ -8676,7 +8694,8 @@
           },
           "maxSupply": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -8764,7 +8783,8 @@
           },
           "maxTokens": {
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "contractName": {
             "type": "string",
@@ -8800,10 +8820,6 @@
             "format": "int32"
           },
           "clientWallet": {
-            "type": "string",
-            "nullable": true
-          },
-          "userTermsMessage": {
             "type": "string",
             "nullable": true
           }
@@ -8871,7 +8887,8 @@
             "maximum": 2147483647,
             "minimum": 1,
             "type": "integer",
-            "format": "int32"
+            "format": "int32",
+            "nullable": true
           },
           "numberOfFiles": {
             "maximum": 2147483647,
